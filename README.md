@@ -4,7 +4,7 @@
 
 **A lightweight PvP client that looks good, runs fast, and stays out of your way.**
 
-Custom menus · Movable HUD · Built-in FPS boost · Animated partner capes
+Custom menus · Movable HUD · Animated partner capes
 
 `Minecraft 26.1.2` · `Fabric` · `Client-side only`
 
@@ -16,8 +16,7 @@ Custom menus · Movable HUD · Built-in FPS boost · Animated partner capes
 
 Most PvP clients make you pick between **features** and **frames**. Calamity gives you both.
 
-- ⚡ **High FPS on any PC.** Sodium, Lithium, FerriteCore and ImmediatelyFast are **built in**, so there's nothing extra to install.
-- 🎯 **Made for PvP.** CPS, reach, combo counter, totem tracking, crosshair indicators, cart PvP tools and more.
+- 🎯 **Made for PvP.** CPS, reach, combo counter, totem tracking, crosshair indicators, and more.
 - 🎨 **A cleaner game.** A crimson Calamity menu, an animated home screen and a HUD you can drag anywhere.
 - 🪶 **Lightweight.** Every feature can be turned off, and nothing runs that you don't use.
 - 🛡️ **Works on any server.** It's client-side only, and Calamity players find each other automatically with no account or server needed.
