@@ -1,0 +1,17 @@
+{
+  "version": "0.6.0",
+  "platforms": {
+    "x86_64-linux": {
+      "asset": "misfortune-linux-x64.tar.gz",
+      "hash": "sha256-N/NlDEXXcUoNuYQaZhqbloZDw7kgtxHCuB8MWvuvc2c="
+    },
+    "aarch64-linux": {
+      "asset": "misfortune-linux-arm64.tar.gz",
+      "hash": "sha256-kn0DxIXtDJebMpFLylszwucUnzgyd0Pfz4nqC/VymxE="
+    },
+    "aarch64-darwin": {
+      "asset": "misfortune-macos-arm64.tar.gz",
+      "hash": "sha256-ddA8ag7h3FDXwhPI8B8iIi7OpOpR5ojzsqTAdglA8PM="
+    }
+  }
+}
