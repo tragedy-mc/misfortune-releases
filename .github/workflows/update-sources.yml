@@ -1,0 +1,74 @@
+name: Update flake sources
+
+# Re-pins sources.json (the versions and hashes flake.nix builds from) whenever
+# a release is published here, and commits the result to main.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to pin (e.g. v0.7.0); empty means the latest release
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-sources
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: cachix/install-nix-action@v31
+
+      - name: Resolve tag
+        if: env.TAG == ''
+        run: echo "TAG=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)" >>"$GITHUB_ENV"
+
+      # The release is published before its files finish uploading, so wait
+      # until every Nix platform has an asset and the asset list stops changing.
+      - name: Wait for release assets
+        run: |
+          prev=""
+          for _ in $(seq 60); do
+            assets=$(gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets -q '.assets[].name' | sort)
+            ready=1
+            for p in linux-x64 linux-arm64 macos-arm64; do
+              grep -qx "misfortune-$p.tar.gz" <<<"$assets" || ready=0
+            done
+            if [ "$ready" = 1 ] && [ "$assets" = "$prev" ]; then
+              echo "Assets ready:"; echo "$assets"
+              exit 0
+            fi
+            prev="$assets"
+            sleep 30
+          done
+          echo "Timed out waiting for the assets of $TAG" >&2
+          exit 1
+
+      - name: Pin sources.json
+        run: ./update.sh "$TAG"
+
+      - name: Build x86_64-linux package
+        run: nix build .#misfortune --print-build-logs
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet sources.json; then
+            echo "sources.json already pins $TAG"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Pin flake sources to $TAG" sources.json
+          git push origin HEAD:main
