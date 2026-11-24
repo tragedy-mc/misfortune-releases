@@ -1,17 +1,17 @@
 {
-  "version": "0.8.0",
+  "version": "1.0.0",
   "platforms": {
     "x86_64-linux": {
       "asset": "misfortune-linux-x64.deb",
-      "hash": "sha256-tl6ccHR3me/phPWbypI1SIjPI8Nxc/3ZqSWAmn6KHTY="
+      "hash": "sha256-AiV28sYRAwpvl1tx71iK6ZG8uqbOQIXVhSZ5g7tVrrM="
     },
     "aarch64-linux": {
       "asset": "misfortune-linux-arm64.deb",
-      "hash": "sha256-ioDSYTgkQP+fRLUSqNX3FOoOF4ueIWP54iLKAufos+8="
+      "hash": "sha256-ST2mIxLwN+KbxCkGldOmjKAdmWenWCNmmYcR7qSNR9M="
     },
     "aarch64-darwin": {
       "asset": "misfortune-macos-arm64.dmg",
-      "hash": "sha256-20FcSP+2TQKqd1SMArG/Bjmnq5RijBIA3ytZzUrMaLQ="
+      "hash": "sha256-oho/zHTGux315VBFHXUjr76teRDBJiz5pDWogsZFRGY="
     }
   }
 }
